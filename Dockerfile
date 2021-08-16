@@ -198,10 +198,10 @@ RUN set -x && \
     make all install && \
     popd && \
     # Build readsb.
-    git clone https://github.com/Mictronics/readsb-protobuf.git "/src/readsb-protobuf" && \
+    git clone https://github.com/ktag0629/readsb-protobuf.git "/src/readsb-protobuf" && \
     pushd "/src/readsb-protobuf" && \
     BRANCH_READSB=$(git tag --sort="creatordate" | tail -1) && \
-    git checkout "$BRANCH_READSB" && \
+    git checkout "xA4" && \
     make BLADERF=yes RTLSDR=yes PLUTOSDR=yes && \
     popd && \
     # Install readsb - Copy readsb executables to /usr/local/bin/.
