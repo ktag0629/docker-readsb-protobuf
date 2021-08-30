@@ -151,22 +151,6 @@ RUN set -x && \
     make -Wstringop-truncation install && \
     cp -v "/src/rtl-sdr/rtl-sdr.rules" "/etc/udev/rules.d/" && \
     popd && popd && \
-    # Build dependencies, libiio for PlutoSDR (ADALM-PLUTO).
-    git clone https://github.com/analogdevicesinc/libiio.git "/src/libiio" && \
-    pushd "/src/libiio" && \
-    echo "libiio $(git log | head -1 | cut -d ' ' -f 2)" >> /VERSIONS && \
-    cmake ./ && \
-    make all && \
-    make install && \
-    popd && \
-    # Build dependencies, libad9361 for PlutoSDR (ADALM-PLUTO).
-    git clone https://github.com/analogdevicesinc/libad9361-iio.git "/src/libad9361-iio" && \
-    pushd "/src/libad9361-iio" && \
-    echo "libad9361-iio $(git log | head -1 | cut -d ' ' -f 2)" >> /VERSIONS && \
-    cmake ./ && \
-    make all && \
-    make install && \
-    popd && \
     # Build dependencies, bladeRF.
     git clone https://github.com/Nuand/bladeRF.git "/src/bladeRF" && \
     pushd "/src/bladeRF" && \
@@ -201,8 +185,8 @@ RUN set -x && \
     git clone https://github.com/ktag0629/readsb-protobuf.git "/src/readsb-protobuf" && \
     pushd "/src/readsb-protobuf" && \
     BRANCH_READSB=$(git tag --sort="creatordate" | tail -1) && \
-    git checkout "xA4" && \
-    make BLADERF=yes RTLSDR=yes PLUTOSDR=yes && \
+    git checkout "gps_module" && \
+    make BLADERF=yes && \
     popd && \
     # Install readsb - Copy readsb executables to /usr/local/bin/.
     find "/src/readsb-protobuf" -maxdepth 1 -executable -type f -exec cp -v {} /usr/local/bin/ \; && \
